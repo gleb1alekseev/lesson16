@@ -3,6 +3,7 @@ package tests;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class SampleAppTest {
@@ -18,5 +19,9 @@ public class SampleAppTest {
         driver.findElement(By.name("UserName")).sendKeys("Gleb");
         driver.findElement(By.name("Password")).sendKeys("pwd");
         driver.findElement(By.xpath("//*[@id=\"login\"]")).click();
+
+        String expectedResult = "Welcome, Gleb!";
+        String actualResult = driver.findElement(By.xpath("//*[@id=\"loginstatus\"]")).getText();
+        Assert.assertEquals(expectedResult, actualResult);
     }
 }

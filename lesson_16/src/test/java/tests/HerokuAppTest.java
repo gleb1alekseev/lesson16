@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 
 public class HerokuAppTest {
     // 1. Open browser site https://the-internet.herokuapp.com/login
@@ -18,6 +19,10 @@ public class HerokuAppTest {
         driver.findElement(By.name("username")).sendKeys("tomsmith");
         driver.findElement(By.name("password")).sendKeys("SuperSecretPassword!");
         driver.findElement(By.xpath("//*[@id=\"login\"]/button")).click();
+
+        String expectedResult = "Welcome to the Secure Area. When you are done click logout below.";
+        String actualResult = driver.findElement(By.xpath("//*[@id=\"content\"]/div/h4")).getText();
+        Assert.assertEquals(expectedResult, actualResult);
 
     }
 }
